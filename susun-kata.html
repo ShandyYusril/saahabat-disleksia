@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Susun Kata - Sahabat Disleksia</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header class="main-header">
+  <div class="container nav-container">
+
+    <a href="index.html" class="brand-logo">
+      <span class="logo-icon">📖</span>
+
+      <div class="brand-text">
+        <span class="site-title">Sahabat Disleksia</span>
+        <span class="site-tagline">
+          Beda Cara Baca, Dibalik Susunan Kata.
+        </span>
+      </div>
+    </a>
+
+    <nav>
+      <ul class="nav-links">
+
+        <li><a href="index.html" class="nav-link">🏠 Beranda</a></li>
+        <li><a href="belajar.html" class="nav-link">✏️ Belajar</a></li>
+        <li><a href="susun-huruf.html" class="nav-link">🧩 Susun Huruf</a></li>
+        <li><a href="susun-kata.html" class="nav-link active">🧱 Susun Kata</a></li>
+        <li><a href="mengeja-kata.html" class="nav-link">🔊 Mengeja Kata</a></li>
+        <li><a href="game-labirin.html" class="nav-link">🌀 Game Labirin</a></li>
+        <li><a href="evaluasi.html" class="nav-link">📊 Evaluasi</a></li>
+        <li><a href="profil.html" class="nav-link">👤 Profil</a></li>
+
+
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
+
+<main class="container">
+
+  <section class="page-header">
+    <h1>🧱 Susun Kata</h1>
+
+    <p>
+      Susun suku kata yang tersedia hingga menjadi kata yang sesuai dengan gambar.
+    </p>
+  </section>
+
+
+  <section class="word-game-card">
+
+    <!-- Statistik -->
+    <div class="game-stats">
+
+      <div>
+        ⭐ <strong>Skor:</strong>
+        <span id="score">0</span>
+      </div>
+
+      <div>
+        🎯 <strong>Pertanyaan:</strong>
+        <span id="questionNumber">1 / 8</span>
+      </div>
+
+    </div>
+
+
+    <!-- Gambar -->
+    <div class="word-picture">
+
+      <div id="wordImage" class="picture-placeholder">
+        🖼️
+      </div>
+
+      <h2 id="wordHint">
+        Susun suku kata sesuai dengan gambar!
+      </h2>
+
+    </div>
+
+
+    <!-- Susunan Anak -->
+    <div class="syllable-section">
+
+      <h3>
+        Susunan Kata Kamu
+      </h3>
+
+      <p class="instruction">
+        Klik suku kata untuk menambahkannya ke susunan kata.
+      </p>
+
+      <div id="answerArea" class="answer-area"></div>
+
+    </div>
+
+
+    <!-- Pilihan Suku Kata -->
+    <div class="syllable-section">
+
+      <h3>
+        Pilihan Suku Kata
+      </h3>
+
+      <p class="instruction">
+        Klik suku kata untuk menyusunnya.
+      </p>
+
+      <div id="syllableOptions" class="syllable-options"></div>
+
+    </div>
+
+
+    <!-- Feedback -->
+    <div id="feedback" class="game-feedback"></div>
+
+
+    <!-- Tombol -->
+    <div class="game-actions">
+
+      <button
+        id="checkAnswer"
+        class="btn btn-primary"
+        type="button"
+      >
+        🚀 Cek Jawaban
+      </button>
+
+      <button
+        id="resetAnswer"
+        class="btn btn-outline"
+        type="button"
+      >
+        🔄 Ulangi
+      </button>
+
+      <button
+        id="nextQuestion"
+        class="btn btn-success"
+        type="button"
+        style="display:none;"
+      >
+        ➡️ Lanjut
+      </button>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer class="main-footer">
+
+  <div class="container footer-content">
+
+    <div>
+      <h3>📖 Sahabat Disleksia</h3>
+
+      <p>
+        Beda Cara Baca, Dibalik Susunan Kata.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>
+      &copy; 2026 Sahabat Disleksia.
+    </p>
+  </div>
+
+</footer>
+
+
+<script src="js/main.js"></script>
+<script src="js/susun-kata.js"></script>
+
+</body>
+</html>

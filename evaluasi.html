@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluasi Perkembangan Membaca - Sahabat Disleksia</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Header Navigasi -->
+  <header class="main-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <span class="logo-icon">📖</span>
+        <div class="brand-text">
+          <span class="site-title">Sahabat Disleksia</span>
+          <span class="site-tagline">Beda Cara Baca, Dibalik Susunan Kata.</span>
+        </div>
+      </a>
+
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Buka Menu">☰</button>
+
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html" class="nav-link">🏠 Beranda</a></li>
+          <li><a href="belajar.html" class="nav-link">✏️ Belajar</a></li>
+          <li><a href="susun-huruf.html" class="nav-link">🧩 Susun Huruf</a></li>
+          <li><a href="susun-kata.html" class="nav-link">🧱 Susun Kata</a></li>
+          <li><a href="mengeja-kata.html" class="nav-link">🔊 Mengeja Kata</a></li>
+          <li><a href="game-labirin.html" class="nav-link">🌀 Game Labirin</a></li>
+          <li><a href="evaluasi.html" class="nav-link active">📊 Evaluasi</a></li>
+          <li><a href="profil.html" class="nav-link">👤 Profil</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Content Evaluasi Utama -->
+  <main class="container" style="margin-bottom: 60px;">
+
+      <!-- Area Tampilan Soal Aktif -->
+      <div id="evalQuestionArea">
+        <!-- Rendered dynamically by js/evaluasi.js -->
+      </div>
+
+      <!-- Feedback Alert Box -->
+      <div id="evalStepFeedback" class="alert-message" style="margin-top: 20px; display: none;"></div>
+
+      <!-- Group Tombol Aksi Wizard (Cek Jawaban & Lanjut) -->
+      <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 25px;">
+
+        <button class="btn btn-secondary" id="btnResetStep" onclick="resetCurrentStep()" style="padding: 12px 24px; font-size: 1rem; display: none;">
+          🔄 Hapus / Reset
+        </button>
+
+        <button class="btn btn-accent" id="btnNextStep" onclick="nextQuestionStep()" style="padding: 12px 32px; font-size: 1.05rem; font-weight: bold; display: none;">
+          ➡️ Lanjut Soal Berikutnya
+        </button>
+      </div>
+
+    </div>
+
+    <!-- HALAMAN HASIL AKHIR EVALUASI (TAMPIL SETELAH KELIMA SOAL SELESAI) -->
+    <div class="eval-results-card" id="evalResultsPage" style="display: none;">
+      
+      <div class="results-hero-banner">
+        <div style="font-size: 4rem; margin-bottom: 8px;">🎉🏆🌟</div>
+        <h2 style="font-family: var(--font-heading); color: var(--primary); font-size: 2.2rem; margin-bottom: 8px;">
+          Hasil Akhir Evaluasi Membaca
+        </h2>
+        <p id="positiveMessageBanner" style="font-size: 1.2rem; font-weight: 700; color: var(--secondary); margin: 0;">
+          🎉 HEBAT SEKALI! Kamu luar biasa! Teruslah semangat belajar membaca! 🌟
+        </p>
+      </div>
+
+      <!-- Ringkasan Nilai Akhir & Jumlah Benar -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 30px;" class="eval-grid-responsive">
+        <div style="background: #EBF5FF; border-radius: var(--radius-md); padding: 22px; border: 2.5px solid #BEE3F8;">
+          <div style="font-size: 0.95rem; font-weight: bold; color: var(--primary);">NILAI AKHIR</div>
+          <div class="results-score-big" id="finalResultScore">100</div>
+          <div style="font-size: 0.9rem; color: var(--text-muted);" id="finalResultGrade">Predikat: SANGAT BAIK</div>
+        </div>
+
+        <div style="background: #FFF9E6; border-radius: var(--radius-md); padding: 22px; border: 2.5px solid #FFE082;">
+          <div style="font-size: 0.95rem; font-weight: bold; color: var(--secondary);">JUMLAH BENAR</div>
+          <div class="results-score-big" style="color: var(--secondary);" id="finalResultCorrect">5 / 5 Soal</div>
+          <div style="font-size: 0.9rem; color: var(--text-muted);">Jawaban Tepat</div>
+        </div>
+
+        <div style="background: #E8F8F0; border-radius: var(--radius-md); padding: 22px; border: 2.5px solid #C8E6C9;">
+          <div style="font-size: 0.95rem; font-weight: bold; color: var(--accent);">PERSENTASE AKURASI</div>
+          <div class="results-score-big" style="color: var(--accent);" id="finalResultAccuracy">100%</div>
+          <div style="font-size: 0.9rem; color: var(--text-muted);">Tingkat Akurasi</div>
+        </div>
+      </div>
+
+      <!-- Rincian Hasil Setiap Jenis Soal -->
+      <h3 style="font-family: var(--font-heading); color: var(--text-main); font-size: 1.3rem; margin-bottom: 15px; text-align: left;">
+        📋 Rincian Nilai Per Jenis Soal:
+      </h3>
+      <div class="results-grid">
+        <div class="results-breakdown-card">
+          <div style="font-size: 1.5rem; margin-bottom: 5px;">📝</div>
+          <div style="font-weight: bold; font-size: 0.95rem;">Pilihan Ganda</div>
+          <div style="font-size: 1.4rem; font-weight: 800; color: var(--primary); margin: 6px 0;" id="resScore_pilihanGanda">100%</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Mengenal Huruf Mirip</div>
+        </div>
+
+        <div class="results-breakdown-card">
+          <div style="font-size: 1.5rem; margin-bottom: 5px;">🧩</div>
+          <div style="font-weight: bold; font-size: 0.95rem;">Susun Huruf</div>
+          <div style="font-size: 1.4rem; font-weight: 800; color: var(--secondary); margin: 6px 0;" id="resScore_susunHuruf">100%</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Menyusun Huruf Kata</div>
+        </div>
+
+        <div class="results-breakdown-card">
+          <div style="font-size: 1.5rem; margin-bottom: 5px;">🧱</div>
+          <div style="font-weight: bold; font-size: 0.95rem;">Susun Kata</div>
+          <div style="font-size: 1.4rem; font-weight: 800; color: var(--purple); margin: 6px 0;" id="resScore_susunKata">100%</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Menyusun Kalimat</div>
+        </div>
+
+        <div class="results-breakdown-card">
+          <div style="font-size: 1.5rem; margin-bottom: 5px;">🔤</div>
+          <div style="font-weight: bold; font-size: 0.95rem;">Susun Suku Kata</div>
+          <div style="font-size: 1.4rem; font-weight: 800; color: var(--accent); margin: 6px 0;" id="resScore_susunSukuKata">100%</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Struktur Suku Kata</div>
+        </div>
+
+        <div class="results-breakdown-card">
+          <div style="font-size: 1.5rem; margin-bottom: 5px;">🔊</div>
+          <div style="font-weight: bold; font-size: 0.95rem;">Mengeja Kata</div>
+          <div style="font-size: 1.4rem; font-weight: 800; color: #3498DB; margin: 6px 0;" id="resScore_mengejaKata">100%</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Kejelasan Mengeja</div>
+        </div>
+      </div>
+
+      <!-- Pesan Evaluasi & Rekomendasi -->
+      <div style="background: #FFFDF9; border: 2.5px dashed var(--secondary); border-radius: var(--radius-md); padding: 20px; text-align: left; margin: 25px 0;">
+        <h4 style="color: var(--secondary); margin-bottom: 8px; font-size: 1.1rem; display: flex; align-items: center; gap: 6px;">
+          💡 Rekomendasi Pendampingan:
+        </h4>
+        <p id="resultAnalysisText" style="font-size: 1rem; color: var(--text-main); line-height: 1.6; margin: 0;">
+          Ananda menunjukkan penguasaan yang luar biasa! Seluruh jenis soal diselesaikan dengan cemerlang.
+        </p>
+      </div>
+
+      <!-- Catatan Detail Review Soal -->
+      <h3 style="font-family: var(--font-heading); color: var(--text-main); font-size: 1.3rem; margin-bottom: 15px; text-align: left;">
+        🔍 Catatan Jawaban Setiap Soal:
+      </h3>
+      <div id="resultsDetailReviewList" style="text-align: left; margin-bottom: 30px;">
+        <!-- Generasi via js/evaluasi.js -->
+      </div>
+
+    </div>
+
+    <!-- FORM & LOG CATATAN OBSERVASI GURU / ORANG TUA -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start;" class="eval-grid-responsive">
+      
+      <!-- Input Catatan Guru/Orang Tua -->
+      <div style="background: white; border-radius: var(--radius-lg); padding: 25px; box-shadow: var(--shadow-soft); border: 3px solid #EBF5FF;">
+        <h3 style="font-family: var(--font-heading); color: var(--primary); font-size: 1.3rem; margin-bottom: 15px;">
+          ✍️ Tambah Catatan Observasi
+        </h3>
+        
+        <form id="evalNoteForm">
+          <div class="form-group">
+            <label class="form-label" for="observerName">Nama Pengamat</label>
+            <input type="text" id="observerName" class="form-control" placeholder="Contoh: Ibu Ani (Guru SDK 1)" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="observerRole">Peran Pengamat</label>
+            <select id="observerRole" class="form-control">
+              <option value="Guru Kelas">Guru Kelas</option>
+              <option value="Orang Tua">Orang Tua / Wali</option>
+              <option value="Terapis Pendamping">Terapis Pendamping</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="noteText">Catatan Perkembangan Anak</label>
+            <textarea id="noteText" class="form-control" rows="4" placeholder="Tuliskan pengamatan hari ini. (Misal: Ananda sudah bisa membedakan huruf B dan D dengan baik saat main Susun Kata.)" required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            💾 Simpan Catatan Evaluasi
+          </button>
+        </form>
+      </div>
+
+      <!-- Riwayat Catatan Observasi -->
+      <div style="background: white; border-radius: var(--radius-lg); padding: 25px; box-shadow: var(--shadow-soft); border: 3px solid #F5EBFB;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+          <h3 style="font-family: var(--font-heading); color: var(--purple); font-size: 1.3rem;">
+            📋 Riwayat Catatan Observasi
+          </h3>
+          <button class="btn-logout" onclick="resetProgress()" title="Reset Data Evaluasi">🔄 Reset Data</button>
+        </div>
+
+        <div id="notesList" style="max-height: 380px; overflow-y: auto; padding-right: 5px;">
+          <!-- Generasi via js/evaluasi.js -->
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container footer-bottom" style="border: none;">
+      <p>&copy; 2026 Sahabat Disleksia. Beda Cara Baca, Dibalik Susunan Kata.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/evaluasi.js"></script>
+  <script>
+    requireAuth();
+  </script>
+</body>
+</html>

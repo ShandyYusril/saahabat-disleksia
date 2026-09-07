@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Susun Huruf - Sahabat Disleksia</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Header Navigasi -->
+  <header class="main-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <span class="logo-icon">📖</span>
+        <div class="brand-text">
+          <span class="site-title">Sahabat Disleksia</span>
+          <span class="site-tagline">Beda Cara Baca, Dibalik Susunan Kata.</span>
+        </div>
+      </a>
+
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Buka Menu">☰</button>
+
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html" class="nav-link">🏠 Beranda</a></li>
+          <li><a href="belajar.html" class="nav-link">✏️ Belajar</a></li>
+          <li><a href="susun-huruf.html" class="nav-link active">🧩 Susun Huruf</a></li>
+          <li><a href="susun-kata.html" class="nav-link">🧱 Susun Kata</a></li>
+          <li><a href="mengeja-kata.html" class="nav-link">🔊 Mengeja Kata</a></li>
+          <li><a href="game-labirin.html" class="nav-link">🌀 Game Labirin</a></li>
+          <li><a href="evaluasi.html" class="nav-link">📊 Evaluasi</a></li>
+          <li><a href="profil.html" class="nav-link">👤 Profil</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Content Utama Halaman Susun Huruf -->
+  <main class="container" style="margin-bottom: 60px;">
+    
+    <div style="margin-bottom: 20px;">
+      
+    </div>
+
+    <div style="text-align: center; margin-bottom: 30px;">
+      <h1 class="section-title">🧩 Halaman Susun Huruf Interaktif</h1>
+      <p class="section-subtitle">
+        Perhatikan gambar di bawah, pilih dan susun huruf-huruf yang diacak menjadi kata yang tepat, lalu klik tombol <strong>Cek Jawaban</strong>!
+      </p>
+    </div>
+
+    <!-- Area Permainan Susun Huruf -->
+    <div class="susun-container" id="susunGameCard">
+
+      <!-- Board Skor & Progress -->
+      <div class="game-score-board">
+        <div>⭐ Skor: <span id="scoreVal">0</span></div>
+        <div>🎯 Pertanyaan: <span id="questionNum">1</span> / <span id="totalQuestions">8</span></div>
+      </div>
+
+      <!-- Kartu Tampilan Gambar & Petunjuk -->
+      <div class="image-display-card">
+        <div class="image-visual" id="imageVisual">⚽</div>
+        <div class="image-hint-text" id="imageHintText">B - O - L - A</div>
+      </div>
+
+      <!-- Kotak Susunan Huruf (Target Slots) -->
+      <p style="font-weight: 700; color: var(--text-main); margin-bottom: 5px;">
+        Kotak Susunan Kata Kamu (Klik huruf pada kotak jika ingin menghapus):
+      </p>
+      <div class="slots-container" id="slotsContainer">
+        <!-- Generasi via js/susun-huruf.js -->
+      </div>
+
+      <!-- Pesan Feedback (Alert) -->
+      <div id="feedbackMessage" class="alert-message"></div>
+
+      <!-- Pilihan Huruf Acak (Pool Container) -->
+      <p style="font-weight: 700; color: var(--text-muted); margin-bottom: 10px;">
+        Pilihan Huruf yang Diacak (Klik huruf di bawah untuk memasukkan ke dalam kotak):
+      </p>
+      <div class="pool-container" id="poolContainer">
+        <!-- Generasi via js/susun-huruf.js -->
+      </div>
+
+      <!-- Group Tombol Aksi (Termasuk Tombol Cek Jawaban) -->
+      <div class="action-buttons-group">
+        <button class="btn-check-answer" onclick="checkAnswer()">
+          🚀 Cek Jawaban
+        </button>
+        <button class="btn btn-outline" onclick="resetCurrentWord()">
+          🔄 Hapus / Reset Huruf
+        </button>
+      </div>
+
+    </div>
+
+   <!-- Navigasi Bawah -->
+<div style="text-align: center; margin-top: 30px; background: white; padding: 25px; border-radius: var(--radius-lg); box-shadow: var(--shadow-soft); border: 3px solid #EBF5FF;">
+  <h3 style="font-family: var(--font-heading); color: var(--primary); font-size: 1.4rem; margin-bottom: 10px;">
+    Ingin Latihan Menu Lainnya? 🎉
+  </h3>
+
+  <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 15px;">
+    <a href="belajar.html" class="btn btn-primary">✏️ Modul Belajar Utama</a>
+    <a href="susun-kata.html" class="btn btn-accent">🧱 Game Susun Kata</a>
+    <a href="mengenal-huruf.html" class="btn btn-outline">🔤 Mengenal Huruf A-Z</a>
+    <a href="game-labirin.html" class="btn btn-secondary">🌀 Game Labirin</a>
+  </div>
+</div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container footer-bottom" style="border: none;">
+      <p>&copy; 2026 Sahabat Disleksia. Beda Cara Baca, Dibalik Susunan Kata.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/susun-huruf.js"></script>
+  <script>
+    requireAuth();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Game Labirin - Sahabat Disleksia</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* =========================================================
+       GAME LABIRIN - STYLE KHUSUS
+       ========================================================= */
+
+    .maze-game-wrapper {
+      max-width: 1100px;
+      margin: 0 auto 60px;
+    }
+
+    .maze-game-title {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .maze-game-title h1 {
+      margin-bottom: 8px;
+    }
+
+    .maze-game-title p {
+      color: var(--text-muted);
+      max-width: 750px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* GAME CARD */
+
+    .old-maze-card {
+      background: white;
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow-soft);
+      border: 3px solid #EBF5FF;
+    }
+
+    /* HUD */
+
+    .maze-hud {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .maze-hud-item {
+      background: #F8FAFC;
+      border: 2px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 12px 18px;
+      min-width: 150px;
+      text-align: center;
+    }
+
+    .maze-hud-label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 3px;
+      font-weight: 700;
+    }
+
+    .maze-hud-value {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    /* PROGRESS */
+
+    .progress-stars {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 3px;
+    }
+
+    .star-slot {
+      font-size: 1.2rem;
+      opacity: 0.45;
+      transition: 0.2s ease;
+    }
+
+    .star-slot.done {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+
+    /* CANVAS */
+
+    .canvas-wrapper {
+      width: 100%;
+      max-width: 620px;
+      margin: 0 auto;
+      position: relative;
+      background: #F8FAFC;
+      border-radius: 20px;
+      padding: 12px;
+      border: 3px solid #E2E8F0;
+      box-sizing: border-box;
+    }
+
+    #game-canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+      border-radius: 12px;
+      touch-action: none;
+    }
+
+    /* LEGEND */
+
+    .maze-legend {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* CONTROL PANEL */
+
+    .controls-panel {
+      max-width: 620px;
+      margin: 22px auto 0;
+      text-align: center;
+    }
+
+    .character-selector-mini {
+      background: #FFF9ED;
+      border: 2px solid #FFE0A3;
+      border-radius: 15px;
+      padding: 13px 16px;
+      margin-bottom: 18px;
+    }
+
+    .character-selector-mini label {
+      display: block;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #7C4A03;
+    }
+
+    .custom-select {
+      width: 100%;
+      max-width: 330px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 2px solid #F5C46B;
+      background: white;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    /* MODAL */
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      z-index: 9999;
+      overflow-y: auto;
+    }
+
+    .modal-backdrop.hidden {
+      display: none;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 650px;
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+      overflow: hidden;
+    }
+
+    .quiz-card {
+      border: 4px solid #EBF5FF;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 18px 22px;
+      background: #F8FAFC;
+      border-bottom: 2px solid #E2E8F0;
+    }
+
+    .modal-tag {
+      display: inline-block;
+      background: #E8F1FF;
+      color: #357ABD;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-weight: 800;
+      font-size: 0.85rem;
+    }
+
+    .modal-body {
+      padding: 25px;
+    }
+
+    .question-illustration {
+      text-align: center;
+      min-height: 70px;
+      margin-bottom: 12px;
+      font-size: 3rem;
+    }
+
+    .question-text {
+      text-align: center;
+      color: var(--primary);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .question-hint {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .option-btn {
+      border: 3px solid #DCE6F2;
+      background: white;
+      border-radius: 15px;
+      padding: 15px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.15s ease;
+      min-height: 60px;
+    }
+
+    .option-btn:hover {
+      border-color: #4A90E2;
+      background: #F4F9FF;
+    }
+
+    .option-btn.correct {
+      border-color: #2ECC71;
+      background: #E8F8F0;
+    }
+
+    .option-btn.incorrect {
+      border-color: #F5A3A3;
+      background: #FFF0F0;
+      animation: shake .25s linear;
+    }
+
+    @keyframes shake {
+      0%,100% {
+        transform: translateX(0);
+      }
+
+      25% {
+        transform: translateX(-5px);
+      }
+
+      75% {
+        transform: translateX(5px);
+      }
+    }
+
+    /* FEEDBACK */
+
+    .feedback-banner {
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .feedback-banner.hidden {
+      display: none;
+    }
+
+    .feedback-banner.success {
+      background: #E8F8F0;
+      color: #177245;
+      border: 2px solid #8FE0B4;
+    }
+
+    .feedback-banner.retry {
+      background: #FFF8E1;
+      color: #7C4A03;
+      border: 2px solid #F5D47A;
+    }
+
+    /* SETTINGS */
+
+    .settings-card {
+      max-width: 600px;
+    }
+
+    .settings-body {
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+
+    .setting-group {
+      margin-bottom: 22px;
+    }
+
+    .setting-label {
+      display: block;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+
+    .radio-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .radio-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px;
+      border-radius: 10px;
+      background: #F8FAFC;
+      cursor: pointer;
+    }
+
+    .theme-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .theme-picker-btn {
+      border: 2px solid #DCE6F2;
+      background: white;
+      border-radius: 10px;
+      padding: 9px 12px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .theme-picker-btn.active {
+      border-color: #4A90E2;
+      background: #EEF7FF;
+      color: #357ABD;
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 18px 22px;
+      border-top: 2px solid #E2E8F0;
+    }
+
+    .close-btn {
+      border: none;
+      background: #F1F5F9;
+      border-radius: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    /* VICTORY */
+
+    .victory-card {
+      text-align: center;
+      max-width: 600px;
+    }
+
+    .victory-header {
+      padding: 30px 20px 20px;
+      background: #FFF9ED;
+    }
+
+    .victory-badge {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #C77A00;
+      margin-bottom: 10px;
+    }
+
+    .victory-header h2 {
+      color: var(--primary);
+      margin: 0;
+    }
+
+    .victory-body {
+      padding: 25px;
+    }
+
+    .stars-earned {
+      font-size: 2rem;
+      letter-spacing: 5px;
+      margin-bottom: 15px;
+    }
+
+    .victory-desc {
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .victory-actions button {
+      border: none;
+      border-radius: 12px;
+      padding: 12px 20px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .btn-secondary {
+      background: #FFF0D9;
+      color: #A85D00;
+    }
+
+    .btn-primary {
+      background: #4A90E2;
+      color: white;
+    }
+
+    @media (max-width: 600px) {
+
+      .old-maze-card {
+        padding: 14px;
+      }
+
+      .maze-hud-item {
+        min-width: 125px;
+      }
+
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dpad-grid {
+        grid-template-columns: repeat(3, 65px);
+        grid-template-rows: repeat(3, 62px);
+      }
+
+      .dpad-btn {
+        font-size: 1.25rem;
+      }
+
+      .modal-body {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================================================
+       HEADER WEBSITE
+       ========================================================= -->
+
+  <header class="main-header">
+
+    <div class="container nav-container">
+
+      <a href="index.html" class="brand-logo">
+
+        <span class="logo-icon">📖</span>
+
+        <div class="brand-text">
+
+          <span class="site-title">
+            Sahabat Disleksia
+          </span>
+
+          <span class="site-tagline">
+            Beda Cara Baca, Dibalik Susunan Kata.
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <button
+        class="mobile-menu-toggle"
+        id="mobileMenuToggle"
+        aria-label="Buka Menu">
+        ☰
+      </button>
+
+
+      <nav>
+
+        <ul
+          class="nav-links"
+          id="navLinks">
+
+          <li>
+            <a href="index.html"
+               class="nav-link">
+              🏠 Beranda
+            </a>
+          </li>
+
+          <li>
+            <a href="belajar.html"
+               class="nav-link">
+              ✏️ Belajar
+            </a>
+          </li>
+
+          <li>
+            <a href="susun-huruf.html"
+               class="nav-link">
+              🧩 Susun Huruf
+            </a>
+          </li>
+
+          <li>
+            <a href="susun-kata.html"
+               class="nav-link">
+              🧱 Susun Kata
+            </a>
+          </li>
+
+          <li>
+            <a href="mengeja-kata.html"
+               class="nav-link">
+              🔤 Mengeja Kata
+            </a>
+          </li>
+
+          <li>
+            <a href="game-labirin.html"
+               class="nav-link active">
+              🌀 Game Labirin
+            </a>
+          </li>
+
+          <li>
+            <a href="evaluasi.html"
+               class="nav-link">
+              📊 Evaluasi
+            </a>
+          </li>
+
+          <li>
+            <a href="profil.html"
+               class="nav-link">
+              👤 Profil
+            </a>
+          </li>
+
+
+        </ul>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================================================
+       MAIN GAME
+       ========================================================= -->
+
+  <main class="container maze-game-wrapper">
+
+    <div class="maze-game-title">
+
+      <h1 class="section-title">
+        🌀 Game Labirin: Petualangan Huruf
+      </h1>
+
+      <p>
+        Jelajahi labirin, temukan tanda tanya ❓,
+        jawab semua soal, lalu capai 🏆 untuk
+        menyelesaikan level!
+      </p>
+
+    </div>
+
+
+    <div class="old-maze-card">
+
+
+      <!-- =====================================================
+           HUD
+           ===================================================== -->
+
+      <div class="maze-hud">
+
+        <div class="maze-hud-item">
+
+          <span class="maze-hud-label">
+            Level
+          </span>
+
+          <span
+            id="level-num"
+            class="maze-hud-value">
+            1
+          </span>
+
+        </div>
+
+
+        <div class="maze-hud-item">
+
+          <span class="maze-hud-label">
+            Soal Terjawab
+          </span>
+
+          <div
+            class="progress-stars"
+            id="progress-stars">
+
+            <span class="star-slot">
+              ❓
+            </span>
+
+            <span class="star-slot">
+              ❓
+            </span>
+
+            <span class="star-slot">
+              ❓
+            </span>
+
+            <span class="star-slot">
+              ❓
+            </span>
+
+            <span class="star-slot">
+              ❓
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="maze-hud-item">
+
+          <span class="maze-hud-label">
+            Bintang
+          </span>
+
+          <span class="maze-hud-value">
+            ⭐
+            <span id="score-count">
+              0
+            </span>
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- =====================================================
+           CANVAS
+           ===================================================== -->
+
+      <div
+        class="canvas-wrapper"
+        id="canvas-wrapper">
+
+        <canvas
+          id="game-canvas">
+        </canvas>
+
+
+        <div class="maze-legend">
+
+          <span class="legend-item">
+            🟢 Mulai
+          </span>
+
+          <span class="legend-item">
+            ❓ Soal (5/5)
+          </span>
+
+          <span class="legend-item">
+            🏆 Selesai
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- =====================================================
+           CONTROLS
+           ===================================================== -->
+
+      <aside class="controls-panel">
+
+
+        <!-- CHARACTER -->
+
+        <div class="character-selector-mini">
+
+          <label for="char-select">
+            🧑‍🚀 Pilih Karaktermu
+          </label>
+
+          <select
+            id="char-select"
+            class="custom-select">
+
+            <option value="🐰">
+              🐰 Kelinci Pandai
+            </option>
+
+            <option value="🐼">
+              🐼 Panda Ceria
+            </option>
+
+            <option value="🦉">
+              🦉 Burung Hantu Bijak
+            </option>
+
+            <option value="🤖">
+              🤖 Robot Sahabat
+            </option>
+
+            <option value="🐱">
+              🐱 Kucing Pemberani
+            </option>
+
+          </select>
+
+        </div>
+
+    <!-- =======================================================
+         NAVIGASI BAWAH
+         ======================================================= -->
+
+    <div
+      style="
+        text-align:center;
+        margin-top:30px;
+        background:white;
+        padding:25px;
+        border-radius:var(--radius-lg);
+        box-shadow:var(--shadow-soft);
+        border:3px solid #EBF5FF;
+      ">
+
+      <h3
+        style="
+          font-family:var(--font-heading);
+          color:var(--primary);
+          font-size:1.4rem;
+          margin-bottom:10px;
+        ">
+
+        Latihan Edukasi Lainnya 🌟
+
+      </h3>
+
+
+      <div
+        style="
+          display:flex;
+          gap:15px;
+          justify-content:center;
+          flex-wrap:wrap;
+          margin-top:15px;
+        ">
+
+        <a
+          href="susun-huruf.html"
+          class="btn btn-accent">
+
+          🧩 Susun Huruf
+
+        </a>
+
+
+        <a
+          href="susun-kata.html"
+          class="btn btn-secondary">
+
+          🧱 Susun Kata
+
+        </a>
+
+
+        <a
+          href="belajar.html"
+          class="btn btn-outline">
+
+          ✏️ Modul Belajar Utama
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- =========================================================
+       QUIZ MODAL
+       ========================================================= -->
+
+  <div
+    id="quiz-modal"
+    class="modal-backdrop hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="quiz-question-text">
+
+    <div class="modal-card quiz-card">
+
+      <div class="modal-header">
+
+        <span
+          id="modal-tag-text"
+          class="modal-tag">
+
+          Tantangan Huruf ❓
+
+        </span>
+
+      </div>
+
+
+      <div class="modal-body">
+
+
+        <div
+          id="question-illustration"
+          class="question-illustration">
+        </div>
+
+      <p
+  id="question-description"
+  class="question-description">
+</p>
+
+        <h2
+          id="quiz-question-text"
+          class="question-text">
+
+          Ini huruf apa?
+
+        </h2>
+
+
+        <p
+          id="question-hint"
+          class="question-hint">
+
+          Pilih jawaban yang tepat.
+
+        </p>
+
+
+        <div
+          id="quiz-options"
+          class="options-grid">
+        </div>
+
+
+        <div
+          id="feedback-message"
+          class="feedback-banner hidden">
+
+          <span
+            id="feedback-icon"
+            class="feedback-icon">
+
+            🎉
+
+          </span>
+
+          <span
+            id="feedback-text"
+            class="feedback-text">
+
+            Tepat Sekali!
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       SETTINGS MODAL
+       AUDIO / TTS SUDAH DIHAPUS
+       ========================================================= -->
+
+  <div
+    id="settings-modal"
+    class="modal-backdrop hidden"
+    role="dialog"
+    aria-modal="true">
+
+    <div class="modal-card settings-card">
+
+
+      <div class="modal-header">
+
+        <h2>
+          ⚙️ Pengaturan Tampilan
+        </h2>
+
+        <button
+          id="btn-close-settings"
+          class="close-btn"
+          type="button"
+          aria-label="Tutup">
+
+          ✕
+
+        </button>
+
+      </div>
+
+
+      <div class="modal-body settings-body">
+
+
+        <!-- FONT -->
+
+        <div class="setting-group">
+
+          <label class="setting-label">
+            🔤 Jenis Font
+          </label>
+
+
+          <div class="radio-options">
+
+            <label class="radio-btn">
+
+              <input
+                type="radio"
+                name="font-choice"
+                value="font-lexend"
+                checked>
+
+              <span>
+                Lexend (Mudah Dibaca)
+              </span>
+
+            </label>
+
+
+            <label class="radio-btn">
+
+              <input
+                type="radio"
+                name="font-choice"
+                value="font-opendyslexic">
+
+              <span>
+                OpenDyslexic
+              </span>
+
+            </label>
+
+
+            <label class="radio-btn">
+
+              <input
+                type="radio"
+                name="font-choice"
+                value="font-fredoka">
+
+              <span>
+                Fredoka
+              </span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <!-- THEME -->
+
+        <div class="setting-group">
+
+          <label class="setting-label">
+            🎨 Warna Latar
+          </label>
+
+
+          <div class="theme-options">
+
+            <button
+              type="button"
+              class="theme-picker-btn active"
+              data-theme="theme-cream">
+
+              Krem Hangat
+
+            </button>
+
+
+            <button
+              type="button"
+              class="theme-picker-btn"
+              data-theme="theme-mint">
+
+              Hijau Mint
+
+            </button>
+
+
+            <button
+              type="button"
+              class="theme-picker-btn"
+              data-theme="theme-softblue">
+
+              Biru Lembut
+
+            </button>
+
+
+            <button
+              type="button"
+              class="theme-picker-btn"
+              data-theme="theme-dark">
+
+              Mode Gelap
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- SPACING -->
+
+        <div class="setting-group">
+
+          <label class="setting-label">
+            ↔️ Jarak Antar Huruf
+          </label>
+
+
+          <div class="radio-options">
+
+            <label class="radio-btn">
+
+              <input
+                type="radio"
+                name="spacing-choice"
+                value="spacing-normal">
+
+              <span>
+                Normal
+              </span>
+
+            </label>
+
+
+            <label class="radio-btn">
+
+              <input
+                type="radio"
+                name="spacing-choice"
+                value="spacing-wide"
+                checked>
+
+              <span>
+                Lebar (Rekomendasi)
+              </span>
+
+            </label>
+
+
+            <label class="radio-btn">
+
+              <input
+                type="radio"
+                name="spacing-choice"
+                value="spacing-extra">
+
+              <span>
+                Sangat Lebar
+              </span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <!-- SIZE -->
+
+        <div class="setting-group">
+
+          <label class="setting-label">
+            🔍 Ukuran Teks
+          </label>
+
+
+          <div class="radio-options">
+
+            <label class="radio-btn">
+
+              <input
+                type="radio"
+                name="size-choice"
+                value="size-medium">
+
+              <span>
+                Sedang
+              </span>
+
+            </label>
+
+
+            <label class="radio-btn">
+
+              <input
+                type="radio"
+                name="size-choice"
+                value="size-large"
+                checked>
+
+              <span>
+                Besar
+              </span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          id="btn-save-settings"
+          class="btn btn-primary"
+          type="button">
+
+          Simpan & Kembali
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       VICTORY MODAL
+       ========================================================= -->
+
+  <div
+    id="victory-modal"
+    class="modal-backdrop hidden"
+    role="dialog"
+    aria-modal="true">
+
+    <div class="modal-card victory-card">
+
+
+      <div class="victory-header">
+
+        <div class="victory-badge">
+          🏆 HEBAT! 🏆
+        </div>
+
+
+        <h2>
+          Kamu Berhasil Menyelesaikan Labirin!
+        </h2>
+
+      </div>
+
+
+      <div class="victory-body">
+
+        <div
+          class="stars-earned"
+          id="victory-stars">
+
+          ⭐⭐⭐⭐⭐
+
+        </div>
+
+
+        <p class="victory-desc">
+
+          Semua 5 soal telah kamu jawab
+          dengan tepat!
+
+          Kamu adalah
+          <strong>Penjelajah Huruf Sejati!</strong>
+          🎉
+
+        </p>
+
+      </div>
+
+
+      <div class="modal-footer victory-actions">
+
+        <button
+          id="btn-restart-level"
+          class="btn-secondary"
+          type="button">
+
+          🔄 Ulangi Level
+
+        </button>
+
+
+        <button
+          id="btn-next-level"
+          class="btn-primary"
+          type="button">
+
+          🚀 Level Berikutnya
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       SCRIPTS
+       ========================================================= -->
+
+  <script src="js/main.js"></script>
+
+
+  <!-- DATA SOAL LAMA -->
+  <script src="js/questions.js"></script>
+
+  <!-- PETA LABIRIN LAMA -->
+  <script src="js/maze.js"></script>
+
+  <!-- ENGINE LABIRIN TANPA AUDIO -->
+  <script src="js/game-labirin.js"></script>
+
+
+  <script>
+    requireAuth();
+  </script>
+
+</body>
+</html>
+

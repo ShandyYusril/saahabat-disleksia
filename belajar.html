@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belajar - Sahabat Disleksia</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .module-card {
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: all 0.3s ease;
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .module-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--primary);
+    }
+    .module-card-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Navigasi -->
+  <header class="main-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <span class="logo-icon">📖</span>
+        <div class="brand-text">
+          <span class="site-title">Sahabat Disleksia</span>
+          <span class="site-tagline">Beda Cara Baca, Dibalik Susunan Kata.</span>
+        </div>
+      </a>
+
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Buka Menu">☰</button>
+
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html" class="nav-link">🏠 Beranda</a></li>
+          <li><a href="belajar.html" class="nav-link active">✏️ Belajar</a></li>
+          <li><a href="susun-huruf.html" class="nav-link">🧩 Susun Huruf</a></li>
+          <li><a href="susun-kata.html" class="nav-link">🧱 Susun Kata</a></li>
+          <li><a href="mengeja-kata.html" class="nav-link">🔊 Mengeja Kata</a></li>
+          <li><a href="game-labirin.html" class="nav-link">🌀 Game Labirin</a></li>
+          <li><a href="evaluasi.html" class="nav-link">📊 Evaluasi</a></li>
+          <li><a href="profil.html" class="nav-link">👤 Profil</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Content Utama Belajar -->
+  <main class="container" style="margin-bottom: 60px;">
+    <div style="text-align: center; margin-bottom: 35px;">
+      <h1 class="section-title">✏️ Modul Belajar Interaktif</h1>
+      <p class="section-subtitle">Pilih salah satu dari 4 menu pembelajaran di bawah ini untuk memulai latihan:</p>
+    </div>
+
+    <!-- 4 KARTU MENU UTAMA PEMBELAJARAN -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 50px;">
+      
+      <!-- Card 1: Mengenal Huruf -->
+      <div class="module-card" onclick="window.location.href='mengenal-huruf.html'" style="border-top: 6px solid var(--primary);">
+        <div class="module-card-icon icon-blue">🔤</div>
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; color: var(--primary); margin-bottom: 8px;">
+          Mengenal Huruf
+        </h3>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">
+          Kartu lengkap A-Z menampilkan huruf besar, huruf kecil, gambar visual, dan pelafalan audio.
+        </p>
+        <a href="mengenal-huruf.html" class="btn btn-outline" style="width: 100%; margin-top: auto; font-size: 0.9rem; padding: 10px;">
+          Buka Huruf A-Z →
+        </a>
+      </div>
+
+      <!-- Card 2: Susun Huruf -->
+      <div class="module-card" onclick="window.location.href='susun-huruf.html'" style="border-top: 6px solid var(--secondary);">
+        <div class="module-card-icon icon-orange">🧩</div>
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; color: var(--secondary); margin-bottom: 8px;">
+          Susun Huruf
+        </h3>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">
+          Permainan menyusun huruf acak menjadi kata utuh lengkap dengan tombol Cek Jawaban!
+        </p>
+       <a href="susun-huruf.html" class="btn btn-susun-huruf">
+          Buka Susun Huruf →
+      </a>
+      </div>
+
+      <!-- Card 3: Susun Kata -->
+      <div class="module-card" onclick="window.location.href='susun-kata.html'" style="border-top: 6px solid var(--purple);">
+        <div class="module-card-icon icon-purple">🧱</div>
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; color: var(--purple); margin-bottom: 8px;">
+          Susun Kata
+        </h3>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">
+          Latihan memilih kata yang tepat sesuai gambar lengkap dengan tombol Cek Jawaban!
+        </p>
+       <a href="susun-kata.html" class="btn btn-outline btn-susun-kata" style="width: 100%; margin-top: auto; font-size: 0.9rem; padding: 10px; border-color: var(--purple); color: var(--purple);">
+          Buka Susun Kata →
+       </a>
+      </div>
+
+      <!-- Card 4: Mengeja Kata -->
+      <div class="module-card" onclick="window.location.href='mengeja-kata.html'" style="border-top: 6px solid var(--accent);">
+        <div class="module-card-icon icon-green">🔊</div>
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; color: var(--accent); margin-bottom: 8px;">
+          Mengeja Kata
+        </h3>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">
+          Latihan membaca kata yang dipecah menjadi suku kata lengkap dengan tombol Kata Berikutnya!
+        </p>
+       <a href="mengeja-kata.html" class="btn btn-outline btn-mengeja-kata" style="width: 100%; margin-top: auto; font-size: 0.9rem; padding: 10px; border-color: var(--accent); color: var(--accent);">
+          Buka Mengeja Kata →
+       </a>
+      </div>
+
+    </div>
+
+    <!-- AREA WORKSPACE INTERAKTIF UNTUK MASING-MASING MENU -->
+
+    <!-- 1. AREA MENGENAL HURUF -->
+    <section id="modulMengenalHuruf" style="background: white; border-radius: var(--radius-lg); padding: 30px; box-shadow: var(--shadow-soft); margin-bottom: 40px; border: 3px solid #EBF5FF;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+        <h2 style="font-family: var(--font-heading); color: var(--primary); font-size: 1.6rem;">
+          🔤 1. Menu: Mengenal Huruf
+        </h2>
+        <button class="audio-btn" onclick="speakText('Menu Mengenal Huruf. Klik kartu huruf di bawah untuk mendengarkan bunyinya.')">🔊 Dengarkan Petunjuk</button>
+      </div>
+      <p style="color: var(--text-muted); margin-bottom: 20px;">Klik kartu huruf di bawah ini untuk mendengar pelafalan fonik:</p>
+      
+      <div class="learn-grid" id="mengenalHurufContainer">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- 2. AREA SUSUN HURUF -->
+    <section id="modulSusunHuruf" style="background: white; border-radius: var(--radius-lg); padding: 30px; box-shadow: var(--shadow-soft); margin-bottom: 40px; border: 3px solid #FFF3E6;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+        <h2 style="font-family: var(--font-heading); color: var(--secondary); font-size: 1.6rem;">
+          🧩 2. Menu: Susun Huruf
+        </h2>
+        <button class="audio-btn" onclick="speakText('Menu Susun Huruf. Klik tombol huruf di bawah untuk memasukkan ke dalam kotak.')" style="color: var(--secondary);">🔊 Dengarkan Petunjuk</button>
+      </div>
+
+      <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+        <div style="font-size: 1.3rem; font-weight: bold; color: var(--text-main); margin-bottom: 15px;" id="susunHurufHint">
+          ⚽ BOLA
+        </div>
+
+        <!-- Target Slots -->
+        <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 25px;" id="susunHurufTargetSlots">
+          <!-- Slots -->
+        </div>
+
+        <div id="susunHurufFeedback" class="alert-message"></div>
+
+        <!-- Letter Pool -->
+        <p style="font-weight: 600; color: var(--text-muted); margin-bottom: 10px;">Pilih Huruf:</p>
+        <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;" id="susunHurufPool">
+          <!-- Options -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. AREA SUSUN KATA -->
+    <section id="modulSusunKata" style="background: white; border-radius: var(--radius-lg); padding: 30px; box-shadow: var(--shadow-soft); margin-bottom: 40px; border: 3px solid #F5EBFB;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+        <h2 style="font-family: var(--font-heading); color: var(--purple); font-size: 1.6rem;">
+          🧱 3. Menu: Susun Kata
+        </h2>
+        <button class="audio-btn" onclick="speakText('Menu Susun Kata. Susun kata menjadi kalimat yang tepat.')" style="color: var(--purple);">🔊 Dengarkan Petunjuk</button>
+      </div>
+
+      <div style="text-align: center; max-width: 650px; margin: 0 auto;">
+        <div style="font-size: 1.3rem; font-weight: bold; color: var(--text-main); margin-bottom: 15px;" id="susunKataHint">
+          📖 Saya Suka Baca
+        </div>
+
+        <!-- Target Word Slots -->
+        <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 25px; flex-wrap: wrap;" id="susunKataTargetSlots">
+          <!-- Slots -->
+        </div>
+
+        <div id="susunKataFeedback" class="alert-message"></div>
+
+        <!-- Word Pool -->
+        <p style="font-weight: 600; color: var(--text-muted); margin-bottom: 10px;">Pilih Kata yang Sesuai:</p>
+        <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;" id="susunKataPool">
+          <!-- Options -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. AREA MENGEJA KATA -->
+    <section id="modulMengejaKata" style="background: white; border-radius: var(--radius-lg); padding: 30px; box-shadow: var(--shadow-soft); margin-bottom: 40px; border: 3px solid #E8F8F0;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+        <h2 style="font-family: var(--font-heading); color: var(--accent); font-size: 1.6rem;">
+          🔊 4. Menu: Mengeja Kata
+        </h2>
+        <button class="audio-btn" onclick="speakText('Menu Mengeja Kata. Klik kartu kata untuk mendengar ejaannya.')" style="color: var(--accent);">🔊 Dengarkan Petunjuk</button>
+      </div>
+      <p style="color: var(--text-muted); margin-bottom: 20px;">Klik kartu kata untuk mendengarkan ejaan per suku kata:</p>
+
+      <div class="learn-grid" id="mengejaKataContainer">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container footer-bottom" style="border: none;">
+      <p>&copy; 2026 Sahabat Disleksia. Beda Cara Baca, Dibalik Susunan Kata.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/belajar.js"></script>
+  <script>
+    requireAuth();
+  </script>
+</body>
+</html>

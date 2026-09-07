@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mengeja Kata - Sahabat Disleksia</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header class="main-header">
+  <div class="container nav-container">
+
+    <a href="index.html" class="brand-logo">
+      <span class="logo-icon">📖</span>
+
+      <div class="brand-text">
+        <span class="site-title">Sahabat Disleksia</span>
+        <span class="site-tagline">
+          Beda Cara Baca, Dibalik Susunan Kata.
+        </span>
+      </div>
+    </a>
+
+    <button
+      class="mobile-menu-toggle"
+      id="mobileMenuToggle"
+      aria-label="Buka Menu"
+    >
+      ☰
+    </button>
+
+    <nav>
+      <ul class="nav-links" id="navLinks">
+
+        <li>
+          <a href="index.html" class="nav-link">
+            🏠 Beranda
+          </a>
+        </li>
+
+        <li>
+          <a href="belajar.html" class="nav-link">
+            ✏️ Belajar
+          </a>
+        </li>
+
+        <li>
+          <a href="susun-huruf.html" class="nav-link">
+            🧩 Susun Huruf
+          </a>
+        </li>
+
+        <li>
+          <a href="susun-kata.html" class="nav-link">
+            🧱 Susun Kata
+          </a>
+        </li>
+
+        <li>
+          <a href="mengeja-kata.html" class="nav-link active">
+            🔤 Mengeja Kata
+          </a>
+        </li>
+
+        <li>
+          <a href="game-labirin.html" class="nav-link">
+            🌀 Game Labirin
+          </a>
+        </li>
+
+        <li>
+          <a href="evaluasi.html" class="nav-link">
+            📊 Evaluasi
+          </a>
+        </li>
+
+        <li>
+          <a href="profil.html" class="nav-link">
+            👤 Profil
+          </a>
+        </li>
+
+
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
+
+<main class="container" style="margin-bottom: 60px;">
+
+  <div style="margin-bottom: 20px;">
+    
+  </div>
+
+
+  <div style="text-align: center; margin-bottom: 30px;">
+
+    <h1 class="section-title">
+      🔤 Mengeja Kata
+    </h1>
+
+    <p class="section-subtitle">
+      Perhatikan gambar, kata, huruf, dan suku katanya.
+      Pelajari cara mengeja setiap kata dengan perlahan.
+    </p>
+
+  </div>
+
+
+  <div
+    class="susun-container mengeja-card"
+    id="mengejaCard"
+    style="border-color: #E8F8F0; max-width: 750px;"
+  >
+
+    <!-- Progress -->
+    <div class="mengeja-progress">
+
+      <span>
+        📊 Progres Mengeja
+      </span>
+
+      <span id="wordCounter">
+        Kata ke-1 dari 10
+      </span>
+
+    </div>
+
+    <div class="spelling-progress-bar">
+      <div
+        class="spelling-progress-fill"
+        id="spellingProgressFill"
+      ></div>
+    </div>
+
+
+    <!-- Gambar dan Kata -->
+    <div class="image-display-card mengeja-visual">
+
+      <div
+        class="image-visual"
+        id="imageVisual"
+      >
+        ⚽
+      </div>
+
+      <h2 id="fullWordText">
+        BOLA
+      </h2>
+
+      <p id="wordDescriptionText">
+        Alat untuk bermain sepak bola.
+      </p>
+
+    </div>
+
+
+    <!-- Ejaan Huruf -->
+    <div class="spelling-section">
+
+      <h3>
+        ✏️ Ejaan Huruf
+      </h3>
+
+      <p>
+        Perhatikan setiap huruf pada kata.
+      </p>
+
+      <div
+        class="letter-spelling"
+        id="letterSpelling"
+      ></div>
+
+    </div>
+
+
+    <!-- Suku Kata -->
+    <div class="spelling-section">
+
+      <h3>
+        🧩 Suku Kata
+      </h3>
+
+      <p>
+        Perhatikan pembagian suku kata.
+      </p>
+
+      <div
+        class="syllable-display"
+        id="syllableDisplay"
+      ></div>
+
+    </div>
+
+
+    <!-- Tombol -->
+    <div
+      class="action-buttons-group"
+      style="margin-top: 30px;"
+    >
+
+      <button
+        class="btn btn-outline"
+        id="prevWord"
+        type="button"
+      >
+        ⬅️ Kata Sebelumnya
+      </button>
+
+      <button
+        class="btn-next-word"
+        id="nextWord"
+        type="button"
+      >
+        Kata Berikutnya ➡️
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- Latihan Lain -->
+  <div
+    style="
+      text-align: center;
+      margin-top: 30px;
+      background: white;
+      padding: 25px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      border: 3px solid #E8F8F0;
+    "
+  >
+
+    <h3
+      style="
+        font-family: var(--font-heading);
+        color: var(--accent);
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+      "
+    >
+      Ingin Mencoba Latihan Lainnya? 🎉
+    </h3>
+
+    <div
+      style="
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 15px;
+      "
+    >
+
+      <a href="belajar.html" class="btn btn-primary">
+        ✏️ Modul Belajar
+      </a>
+
+      <a href="susun-huruf.html" class="btn btn-secondary">
+        🧩 Susun Huruf
+      </a>
+
+      <a
+        href="susun-kata.html"
+        class="btn btn-outline"
+        style="border-color: var(--purple); color: var(--purple);"
+      >
+        🧱 Susun Kata
+      </a>
+
+    </div>
+
+  </div>
+
+</main>
+
+
+<footer class="main-footer">
+
+  <div class="container footer-bottom" style="border: none;">
+
+    <p>
+      &copy; 2026 Sahabat Disleksia.
+      Beda Cara Baca, Dibalik Susunan Kata.
+    </p>
+
+  </div>
+
+</footer>
+
+
+<script src="js/main.js"></script>
+<script src="js/mengeja-kata.js"></script>
+
+<script>
+  requireAuth();
+</script>
+
+</body>
+</html>
