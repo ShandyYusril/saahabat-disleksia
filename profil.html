@@ -55,6 +55,9 @@
         <p style="margin-top: 15px; color: var(--text-muted); font-size: 0.95rem;">
           Akun aktif di portal <strong>Sahabat Disleksia</strong>.
         </p>
+        <p style="margin-top: 8px; color: var(--text-muted); font-size: 0.85rem;" id="sessionStatus">
+          ⏱️ Sesi login: Berlaku 24 jam
+        </p>
       </div>
 
       <div style="text-align: center; margin-top: 30px;">
@@ -87,6 +90,14 @@
       if (user) {
         document.getElementById('profileName').textContent = user.name;
         document.getElementById('profileRole').textContent = user.role;
+      }
+
+      if (typeof getRemainingSessionTime === 'function') {
+        const remain = getRemainingSessionTime();
+        const statusEl = document.getElementById('sessionStatus');
+        if (statusEl && !remain.expired) {
+          statusEl.textContent = `⏱️ Sisa masa aktif login: ~${remain.hours} jam ${remain.minutes} menit (maks. 24 jam)`;
+        }
       }
     });
   </script>

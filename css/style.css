@@ -557,6 +557,12 @@ body.font-dyslexic {
   border: 1px solid #7DD3FC;
 }
 
+.alert-warning {
+  background: #FEF3C7;
+  color: #92400E;
+  border: 1px solid #FCD34D;
+}
+
 /* Modul Belajar */
 .learn-grid {
   display: grid;
