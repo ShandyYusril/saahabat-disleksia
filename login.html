@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Masuk - Sahabat Disleksia</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/auth.js"></script>
+</head>
+<body class="login-body">
+
+  <main class="login-card">
+    <header class="login-header">
+      <div class="login-logo" aria-hidden="true">📖✨</div>
+      <h1 class="login-title">Sahabat Disleksia</h1>
+      <p class="login-subtitle">Silakan masuk untuk mengakses modul belajar & permainan</p>
+    </header>
+
+    <!-- Notifikasi Alert -->
+    <div id="loginAlert" class="alert-message alert-error" role="alert"></div>
+
+    <!-- Form Login -->
+    <form id="loginForm" onsubmit="handleLogin(event)" autocomplete="off">
+      <div class="form-group">
+        <label for="username" class="form-label">👤 Username</label>
+        <input 
+          type="text" 
+          id="username" 
+          name="username"
+          class="form-control" 
+          placeholder="Masukkan username" 
+          required 
+          autofocus
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">🔑 Kata Sandi (Password)</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password"
+          class="form-control" 
+          placeholder="Masukkan kata sandi" 
+          required
+        >
+        <div class="form-helper">Gunakan kredensial yang telah diberikan oleh pengajar / admin.</div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 1.05rem; font-weight: bold; margin-top: 8px;">
+        🚀 Masuk Sekarang
+      </button>
+    </form>
+
+    <footer style="margin-top: 28px; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 15px;">
+      <p>&copy; 2026 Sahabat Disleksia.</p>
+      <p style="font-size: 0.8rem; margin-top: 4px;">Beda Cara Baca, Dibalik Susunan Kata.</p>
+    </footer>
+  </main>
+
+</body>
+</html>
